@@ -16,4 +16,8 @@ let getAllDetails = (req, res) =>{
     studentModel.getAllDetails(res);
 }
 
-module.exports = { createAccount, loginAccount, addDetails, getAllDetails };
+let deleteDetails = (req, res) =>{
+    studentModel.deleteDetails(req.params.id, res);
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails };

@@ -59,4 +59,15 @@ let getAllDetails = (res) => {
     .finally(()=>client.close())
 }
 
-module.exports = { createAccount, loginAccount, addDetails, getAllDetails };
+let deleteDetails = (id, res) =>{
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("studentDB");
+    coll.deleteOne({_id: new ObjectId(id)})
+    .then((result)=>res.send(result))
+    .catch((err)=>res(err))
+    .finally(()=>client.close())
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails };
