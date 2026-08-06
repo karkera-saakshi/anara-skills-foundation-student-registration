@@ -12,4 +12,8 @@ let addDetails = (req, res) =>{
     studentModel.addDetails(req.body, res);
 }
 
-module.exports = { createAccount, loginAccount, addDetails };
+let getAllDetails = (req, res) =>{
+    studentModel.getAllDetails(res);
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails };
