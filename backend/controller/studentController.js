@@ -8,5 +8,8 @@ let loginAccount = (req, res) =>{
     studentModel.loginAccount(req.body, res);
 }
 
+let addDetails = (req, res) =>{
+    studentModel.addDetails(req.body, res);
+}
 
-module.exports = { createAccount, loginAccount };
+module.exports = { createAccount, loginAccount, addDetails };
