@@ -4,13 +4,16 @@ let url = process.env.MONGO_URL
 let getCollection = () => {
     let client = new MongoClient(url);
     client.connect();
-    let db = client.db("project1");
-    let coll = db.collection("events");
+    let db = client.db("student-db");
+    let coll = db.collection("studentDB");
     return { client, coll};
 };
 
 let createAccount = (obj,res) => {
-    let {client, coll} = getCollection();
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("users");
     coll.insertOne(obj)
     .then((result)=> res.send(result))
     .catch((err)=>res.status(500).send(err))
@@ -18,7 +21,10 @@ let createAccount = (obj,res) => {
 }
 
 let loginAccount = (obj,res) => {
-    let {client, coll} = getCollection();
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("users");
     coll.findOne({email: obj.email, password: obj.password})
     .then((result) => {
         if (result) {
@@ -32,11 +38,25 @@ let loginAccount = (obj,res) => {
 };
 
 let addDetails = (obj,res) => {
-    let {client, coll} = getCollection();
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("studentDB");
     coll.insertOne(obj)
     .then((result)=> res.send(result))
     .catch((err)=>res.status(500).send(err))
     .finally (()=>client.close())
 }
 
-module.exports = { createAccount, loginAccount, addDetails };
+let getAllDetails = (res) => {
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("studentDB");
+    coll.find().toArray()
+    .then((result)=>res.send(result))
+    .catch((err)=>res.send(err))
+    .finally(()=>client.close())
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails };
