@@ -37,7 +37,6 @@ function Login() {
     <div className="login-wrapper">
       <div className="login-card">
         <h2>Welcome Back</h2>
-        <p className="subtitle">Log in to your Skill Portal account</p>
 
         {error && <div className="error-message">{error}</div>}
 

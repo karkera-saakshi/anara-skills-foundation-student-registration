@@ -38,7 +38,6 @@ function Signup() {
     <div className="signup-wrapper">
       <div className="signup-card">
         <h2>Create Account</h2>
-        <p className="subtitle">Join Skill Portal to get started</p>
         
         {error && <div className="error-message">{error}</div>}
 

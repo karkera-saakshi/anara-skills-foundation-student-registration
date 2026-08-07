@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Sidebar.css';
+import axios from 'axios';
 
 function Sidebar() {
   const navigate = useNavigate();

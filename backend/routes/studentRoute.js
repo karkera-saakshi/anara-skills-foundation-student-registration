@@ -7,4 +7,8 @@ router.post("/create",studentController.addDetails);
 router.get("/getDetails", studentController.getAllDetails);
 router.delete("/delete/:id", studentController.deleteDetails);
 router.put("/update/:id", studentController.updateDetails);
+router.post("/logout", (req, res) => {
+    res.clearCookie("token");
+    res.send("Logged out successfully");
+  });
 module.exports = router;
