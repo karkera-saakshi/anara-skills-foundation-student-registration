@@ -20,7 +20,7 @@ function Signup() {
       return;
     }
 
-    axios.post("http://localhost:9000/register", formData)
+    axios.post("https://anara-skills-foundation-student.onrender.com/register", formData)
       .then(() => {
         alert("Registration successful!");
         setFormData({

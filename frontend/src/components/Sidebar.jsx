@@ -11,7 +11,7 @@ function Sidebar() {
   };
 
   let handleLogout = () => {
-    axios.post("http://localhost:9000/logout", {}, { withCredentials: true })
+    axios.post("https://anara-skills-foundation-student.onrender.com/logout", {}, { withCredentials: true })
       .then(() => {
         navigate('/login');
       })

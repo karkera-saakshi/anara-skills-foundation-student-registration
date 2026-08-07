@@ -17,7 +17,7 @@ function AddStudent() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:9000/create", student)
+    axios.post("https://anara-skills-foundation-student.onrender.com/create", student)
       .then(() => {
         alert("Added Details successfully!");
         setStudent({
