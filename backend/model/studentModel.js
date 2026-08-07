@@ -75,9 +75,10 @@ let updateDetails = (id, obj, res) =>{
     client.connect();
     let db = client.db("student-db");
     let coll = db.collection("studentDB");
-    coll.updateOne({_id: new ObjectId(id)}, {$set: obj})
+    const { _id, id: standardId, ...updateData } = obj;
+    coll.updateOne({_id: new ObjectId(id)}, {$set: updateData})
     .then((result)=>res.send(result))
-    .catch((err)=>res(err))
+    .catch((err)=>res.send(err))
     .finally(()=>client.close())
 }
 

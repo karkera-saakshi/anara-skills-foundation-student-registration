@@ -26,7 +26,7 @@ function Login() {
             email: '',
             password: ''
             });
-            navigate('/dashboard');
+            navigate('/create');
         })
         .catch(() => {
             alert("Error logging in.");
