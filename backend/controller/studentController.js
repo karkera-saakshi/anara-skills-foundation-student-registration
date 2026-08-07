@@ -20,4 +20,8 @@ let deleteDetails = (req, res) =>{
     studentModel.deleteDetails(req.params.id, res);
 }
 
-module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails };
+let updateDetails = (req, res) =>{
+    studentModel.updateDetails(req.params.id, req.body, res);
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails, updateDetails };

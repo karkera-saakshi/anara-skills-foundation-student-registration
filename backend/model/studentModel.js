@@ -70,4 +70,15 @@ let deleteDetails = (id, res) =>{
     .finally(()=>client.close())
 }
 
-module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails };
+let updateDetails = (id, obj, res) =>{
+    let client = new MongoClient(url);
+    client.connect();
+    let db = client.db("student-db");
+    let coll = db.collection("studentDB");
+    coll.updateOne({_id: new ObjectId(id)}, {$set: obj})
+    .then((result)=>res.send(result))
+    .catch((err)=>res(err))
+    .finally(()=>client.close())
+}
+
+module.exports = { createAccount, loginAccount, addDetails, getAllDetails, deleteDetails, updateDetails };
