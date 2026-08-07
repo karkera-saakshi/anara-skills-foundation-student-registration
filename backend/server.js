@@ -10,8 +10,6 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", studentRoute);
-console.log("Checking Environment Variables:");
-console.log("MONGO_URL exists:", !!process.env.MONGO_URL);
-console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+
 
 app.listen(9000, () => console.log("I am listening"));
