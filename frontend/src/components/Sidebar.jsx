@@ -9,6 +9,16 @@ function Sidebar() {
     return location.pathname.includes(path) ? 'nav-item active' : 'nav-item';
   };
 
+  let handleLogout = () => {
+    axios.post("http://localhost:9000/logout", {}, { withCredentials: true })
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((err) => {
+        console.error('Error occurred while logging out:', err);
+      });
+  };
+
   return (
     <aside className="sidebar">
       
@@ -22,7 +32,7 @@ function Sidebar() {
       </nav>
 
       <div className="sidebar-footer">
-        <button className="logout-btn" onClick={() => navigate('/login')}>
+        <button className="logout-btn" onClick={() => handleLogout()}>
           Log Out
         </button>
       </div>

@@ -1,9 +1,17 @@
-require("dotenv").config();
+require("dotenv").config(); 
+
 const express = require("express");
 const cors = require("cors");
-const studentRoute = require("./routes/studentRoute")
+const cookieParser = require("cookie-parser");
+const studentRoute = require("./routes/studentRoute"); 
+
 let app = express();
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
+app.use(cookieParser());
 app.use("/", studentRoute);
+console.log("Checking Environment Variables:");
+console.log("MONGO_URL exists:", !!process.env.MONGO_URL);
+console.log("JWT_SECRET exists:", !!process.env.JWT_SECRET);
+
 app.listen(9000, () => console.log("I am listening"));

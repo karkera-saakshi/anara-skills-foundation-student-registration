@@ -1,6 +1,9 @@
 const { MongoClient, ObjectId } = require("mongodb");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-let url = process.env.MONGO_URL 
+let SECRET = process.env.JWT_SECRET;
+let url = process.env.MONGO_URL;
 let getCollection = () => {
     let client = new MongoClient(url);
     client.connect();
@@ -14,28 +17,41 @@ let createAccount = (obj,res) => {
     client.connect();
     let db = client.db("student-db");
     let coll = db.collection("users");
+    obj.password = bcrypt.hashSync(obj.password, 10);
     coll.insertOne(obj)
     .then((result)=> res.send(result))
     .catch((err)=>res.status(500).send(err))
     .finally (()=>client.close())
+
 }
 
-let loginAccount = (obj,res) => {
+let loginAccount = async (obj, res) => {
     let client = new MongoClient(url);
     client.connect();
     let db = client.db("student-db");
     let coll = db.collection("users");
-    coll.findOne({email: obj.email, password: obj.password})
-    .then((result) => {
-        if (result) {
-            res.send({ message: "Login successful", user: result });
-        } else {
-            res.status(401).send({ message: "Invalid credentials" });
-        }
-    })
-    .catch((err) => res.status(500).send(err))
-    .finally(() => client.close());
+    coll.findOne({ email: obj.email })
+        .then((user) => {
+            if (!user) {
+                return res.status(400).send("User not found");
+            }
+            let ok = bcrypt.compareSync(obj.password, user.password);
+            if (!ok) {
+                return res.status(400).send("Password incorrect");
+            }
+            let token = jwt.sign({ id: user._id }, SECRET, { expiresIn: "1h" });
+            res.cookie("token", token, { httpOnly: true, maxAge: 60 * 60 * 1000 }); 
+            
+            res.send("Login Successful");
+        })
+        .catch((err) => {
+            res.status(500).send(err);
+        })
+        .finally(() => {
+            client.close();
+        });
 };
+
 
 let addDetails = (obj,res) => {
     let client = new MongoClient(url);
