@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const studentRoute = require("./routes/studentRoute"); 
 
 let app = express();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "https://anara-skills-foundation-student-99qk.onrender.com", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", studentRoute);
