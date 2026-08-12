@@ -11,7 +11,7 @@ function Sidebar() {
   };
 
   let handleLogout = () => {
-    axios.post("/api/logout", {}, { withCredentials: true })
+    axios.post("https://anara-skills-foundation-student-reg-sigma.vercel.app/logout", {}, { withCredentials: true })
       .then(() => {
         navigate('/login');
       })
