@@ -19,7 +19,7 @@ function Login() {
             setError('Please fill in all fields.');
             return;
         }
-        axios.post("/login", formData, { withCredentials: true })
+        axios.post("/api/login", formData, { withCredentials: true })
         .then(() => {
             alert("Login successful!");
             setFormData({

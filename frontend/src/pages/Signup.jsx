@@ -20,7 +20,7 @@ function Signup() {
       return;
     }
 
-    axios.post("/register", formData)
+    axios.post("/api/register", formData)
       .then(() => {
         alert("Registration successful!");
         setFormData({
