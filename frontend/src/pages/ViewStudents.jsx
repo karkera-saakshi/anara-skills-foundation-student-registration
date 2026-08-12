@@ -23,7 +23,7 @@ function ViewStudents() {
     setLoading(true);
     setError('');
     axios
-      .get("https://anara-skills-foundation-student.onrender.com/getDetails")
+      .get("/getDetails")
       .then((res) => {
         setStudents(res.data);
         setLoading(false);
@@ -56,7 +56,7 @@ function ViewStudents() {
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
     const studentId = selectedStudent.id || selectedStudent._id;
-    axios.put(`https://anara-skills-foundation-student.onrender.com/update/${studentId}`, selectedStudent)
+    axios.put(`/update/${studentId}`, selectedStudent)
     .then(()=>{
         alert("Details updated successfully!");
         setIsModalOpen(false);
@@ -71,7 +71,7 @@ function ViewStudents() {
     const studentId = student.id || student._id;
     
     if (window.confirm(`Are you sure you want to delete ${student.name}'s profile?`)) {
-      axios.delete(`https://anara-skills-foundation-student.onrender.com/delete/${studentId}`)
+      axios.delete(`/delete/${studentId}`)
         .then(() => {
           alert("Student record deleted successfully.");
           fetchStudents(); 
