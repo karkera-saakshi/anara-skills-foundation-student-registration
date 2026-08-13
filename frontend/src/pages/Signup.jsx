@@ -20,7 +20,7 @@ function Signup() {
       return;
     }
 
-    axios.post("https://anara-skills-foundation-student-reg-sigma.vercel.app/register", formData)
+    axios.post("https://anara-skills-foundation-student-reg-sigma.vercel.app/api/register", formData)
       .then(() => {
         alert("Registration successful!");
         setFormData({

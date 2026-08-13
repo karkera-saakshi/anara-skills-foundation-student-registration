@@ -17,7 +17,7 @@ function AddStudent() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("https://anara-skills-foundation-student-reg-sigma.vercel.app//create", student)
+    axios.post("https://anara-skills-foundation-student-reg-sigma.vercel.app/api/create", student)
       .then(() => {
         alert("Added Details successfully!");
         setStudent({

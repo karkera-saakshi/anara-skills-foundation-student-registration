@@ -15,7 +15,8 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/", studentRoute);
+app.use("/api", studentRoute);
 
 
 app.listen(9000, () => console.log("I am listening"));
+module.exports = app;
