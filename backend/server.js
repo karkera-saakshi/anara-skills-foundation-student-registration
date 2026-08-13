@@ -1,4 +1,9 @@
-require("dotenv").config();
+try {
+  require("dotenv").config();
+} catch (e) {
+  // dotenv not available in production — Vercel injects env vars directly, so this is fine
+}
+
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
